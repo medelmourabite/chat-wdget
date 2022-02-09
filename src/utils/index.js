@@ -1,5 +1,4 @@
 import moment from "moment";
-import {useState, useEffect} from "react";
 
 import {
   align,
@@ -13,31 +12,6 @@ import {
   list,
   table, template, textStyle
 } from "suneditor/src/plugins";
-
-import fr from "../i18n/fr";
-import en from "../i18n/en";
-import nl from "../i18n/nl";
-
-let currentLanguage = "fr";
-export const useTranslation = () => {
-  const [lng, setLng] = useState(currentLanguage);
-
-  useEffect(() => {
-    currentLanguage = lng || "fr";
-  }, [lng]);
-  let t;
-  switch (lng) {
-    case "fr":
-      t = key => fr?.[key] || key;
-      break;
-    case "nl":
-      t = key => nl?.[key] || key;
-      break;
-    default:
-      t = key => en?.[key] || key;
-  }
-  return {lng, t, setLng};
-};
 
 const yesterday = "hier";
 const sameDay = "H:mm";
@@ -75,13 +49,14 @@ const sameElse = function (now) {
   return diff < 0 ? "MMM D YYYY" : "MMM D";
 };
 
-export const timeSince = (date) => moment(date).calendar(null, {
-  lastDay: `[${yesterday}]`,
-  sameDay,
-  lastWeek: "dddd",
-  sameElse,
-});
-// export const timeSince = (date) => moment(date).fromNow(true);
+// export const timeSince = (date) => moment(date).calendar(null, {
+//   lastDay: `[${yesterday}]`,
+//   sameDay,
+//   lastWeek: "dddd",
+//   sameElse,
+// });
+
+ export const timeSince = (date) => moment(date).fromNow(true);
 
 export const stripeTags = (str = "") => {
   return str.replace(/(<\/?[^>]+(>|$)|\&[\w]+\;)/g, "");

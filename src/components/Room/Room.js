@@ -5,8 +5,9 @@ import {createMessage, getMessageSubs, updateRoom} from "../../firebase";
 import Message from "../Message/Message";
 import cx from "classnames";
 import Editor from "../Editor/Editor";
-import {stripeTags, useTranslation} from "../../utils";
+import {stripeTags} from "../../utils";
 import {BOT} from "../../firebase/misc";
+import {useTranslation} from "../../i18n";
 
 const Room = ({currentUser, currentRoom, closeRoom, firstMsg}) => {
   let {name, avatar, users} = currentRoom;

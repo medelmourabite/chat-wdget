@@ -3,7 +3,7 @@ import styles from "./Chat.module.scss";
 import Rooms from "../Rooms/Rooms";
 import Room from "../Room/Room";
 import {createUser, getCurrentRoom} from "../../firebase";
-import {useTranslation} from "../../utils";
+import {useTranslation} from "../../i18n";
 
 const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users = [], showRooms = true, firstMsg = "", lng = "fr"}) => {
   const [showRoom, setShowRoom] = useState(false);
