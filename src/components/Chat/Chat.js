@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { PureComponent } from "react";
 import styles from "./Chat.module.scss";
 import {
   createMessage,
-  createRoom,
   createUser,
   getCurrentRoom,
   getMessageSubs,
   getUserRooms,
-} from "../../firebase/chat";
+} from "../../firebase";
 import Users from "./Users";
 import { Avatar } from "../Avatar/Avatar";
-import Message from "./Message";
+import Message from "../Message/Message";
+import Header from "../Header/Header";
+import Rooms from "../Rooms/Rooms";
 
-export default class Chat extends Component {
+export default class Chat extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ export default class Chat extends Component {
 
   subscribeToMessages = () => {
     const { currentRoom } = this.state;
-    getMessageSubs(currentRoom, (messages) => {
+    return getMessageSubs(currentRoom, (messages) => {
       this.setState({ messages });
     });
   };
@@ -39,7 +39,7 @@ export default class Chat extends Component {
     if (currentUser) {
       createUser(currentUser);
       if (users?.length) {
-        const currentRoom = await getCurrentRoom(users);
+        const currentRoom = await getCurrentRoom([currentUser, ...users]);
         this.setState({ currentRoom, newRoom: !currentRoom });
       }
       const rooms = await getUserRooms(currentUser.id);
@@ -69,11 +69,11 @@ export default class Chat extends Component {
     this.unsubscribe && this.unsubscribe();
   }
 
-  createRoom = async () => {
-    const { users } = this.props;
-    const currentRoom = await createRoom(users);
-    this.setState({ currentRoom, newRoom: false });
-  };
+  // createRoom = async () => {
+  //   const { currentUser, users } = this.props;
+  //   const currentRoom = await createRoom([currentUser, ...users]);
+  //   this.setState({ currentRoom, newRoom: false, rooms: [currentRoom, ...this.state.rooms] });
+  // };
 
   send = async () => {
     const { currentUser } = this.props;
@@ -96,42 +96,14 @@ export default class Chat extends Component {
 
     if (status === "CLOSED") return "";
 
+
+    return <div className={styles.container}>
+      <Rooms currentUser={currentUser} rooms={rooms} openRoom={(room) => this.setState(room)}/>
+    </div>;
+
     return (
       <div className={styles.container}>
-        <div className={styles.header}>
-          {currentRoom?.users?.length ? (
-            <Users
-              users={currentRoom.users.filter(
-                ({ id }) => id !== currentUser.id
-              )}
-            />
-          ) : (
-            <Avatar {...currentUser} />
-          )}
-          <div className={styles.headerActions}>
-            {currentRoom || newRoom ? (
-              <button
-                onClick={() =>
-                  this.setState({ currentRoom: null, newRoom: false })
-                }
-              >
-                {"<-"}
-              </button>
-            ) : null}
-            <button onClick={() => this.setState({ status: "CLOSED" })}>
-              X
-            </button>
-            {status !== "MINIMIZED" ? (
-              <button onClick={() => this.setState({ status: "MINIMIZED" })}>
-                _
-              </button>
-            ) : (
-              <button onClick={() => this.setState({ status: "MAXIMIZED" })}>
-                =
-              </button>
-            )}
-          </div>
-        </div>
+        <Header currentUser={currentUser} />
         {status !== "MINIMIZED" ? (
           <div className={styles.body}>
             {currentRoom

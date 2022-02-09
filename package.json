@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.3.1",
     "firebase": "^8.10.0",
+    "moment": "^2.29.1",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "source-map-explorer": "^2.5.2",
+    "suneditor": "^2.42.0",
+    "suneditor-react": "^3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:widget": "parcel build src/index.js --no-source-maps -d widget && cp build/static/css/*.css widget/index.css",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
@@ -32,6 +39,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "parcel-bundler": "^1.12.5"
   }
 }

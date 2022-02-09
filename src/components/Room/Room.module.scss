@@ -1,0 +1,82 @@
+.room {
+  width: 605px;
+  height: 660px;
+  background: #FFFFFF;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 30px rgba(41, 57, 77, 0.3);
+  position: relative;
+  transition: height .3s;
+}
+
+.minimized {
+  height: 48px;
+  overflow: hidden;
+  .roomBody, .roomFooter {
+    //display: none;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+  :global(.sun-editor .se-wrapper) {
+    height: 100px !important;
+  }
+}
+
+.roomBody {
+  padding: 15px;
+  height: 418px;
+  overflow: scroll;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 4px;
+
+  & > span {
+    padding: 4px 12px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #FEFEFE;
+    color: #2c2b3f;
+  }
+}
+
+.roomFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 15px 15px;
+  background: white;
+  border-top: 1px solid #d8e8fe;
+  box-shadow: 1px -1px 4px 3px #d8dde238;
+
+  textarea {
+    padding: 6px 16px;
+    background: #FFFFFF;
+    border: 1px solid #18A0FB;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-right: 8px;
+    height: 44px;
+    flex: 1;
+    resize: none;
+  }
+
+  & > button {
+    border: none;
+    background: #18A0FB;
+    height: 40px;
+    border-radius: 5px;
+    color: #fefefe;
+    padding: 5px 25px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    cursor: pointer;
+  }
+}

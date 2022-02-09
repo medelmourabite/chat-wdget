@@ -3,8 +3,8 @@
 }
 
 .avatar {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: #fff;
   background-position: center;
@@ -27,6 +27,7 @@
   text-align: center;
   color: #ffffff;
   background-color: #6d7f92;
+  font-size: 14px;
 }
 
 .avatarInfo {
@@ -38,13 +39,10 @@
 .avatarName {
   font-size: 12px;
   line-height: 14px;
-  color: #3c4e64;
+  font-weight: 500;
   margin-bottom: 2px;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #C7E8FE;
 }
 
-.avatarSignature {
-  font-weight: 300;
-  font-size: 10px;
-  line-height: 12px;
-  color: #6d7f92;
-}

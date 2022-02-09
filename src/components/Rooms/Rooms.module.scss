@@ -1,0 +1,18 @@
+.rooms {
+  width: 372px;
+  height: 660px;
+  background: #FFFFFF;
+  box-shadow: 0 0 30px rgba(41, 57, 77, 0.3);
+  border-radius: 5px 5px 0 0;
+  transition: height .3s;
+  margin-left: 18px;
+}
+
+.minimized {
+  height: 48px;
+  overflow: hidden;
+}
+
+.roomsList {
+  //display: flex;
+}

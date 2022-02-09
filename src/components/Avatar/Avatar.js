@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-
+import React from "react";
 import styles from "./Avatar.module.scss";
 
 function getUserNameForAvatar(userName = "") {
   const arrayStr = userName.split(" ");
   let result = "";
-  for (let i = 0; i < arrayStr.length; i++) {
+  for (let i = 0; i < arrayStr.length && i < 2; i++) {
     if (arrayStr[i]) {
       result += arrayStr[i].substring(0, 1);
     }
@@ -13,37 +12,28 @@ function getUserNameForAvatar(userName = "") {
   return result.toUpperCase();
 }
 
-export class Avatar extends Component {
-  render() {
-    const {
-      avatarUrl,
-      showInfo,
-      avatarSignature,
-      userName,
-    } = this.props;
-
+export const Avatar = (props) => {
+    let { avatar, name, firstName, userName, lastName, showInfo, style = {}} = props;
+    if(!name) {
+      name = userName || firstName + " " + lastName
+    }
     return (
       <div className={styles.avatarContainer}>
-        {avatarUrl ? (
-          <div
-            className={styles.avatar}
-            style={{ backgroundImage: `url(${avatarUrl})` }}
-          ></div>
+        {avatar ? (
+          <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})`, ...style }}/>
         ) : (
-          <div className={`${styles.avatar} ${styles.emptyAvatar}`}>
-            {getUserNameForAvatar(userName)}
+          <div className={`${styles.avatar} ${styles.emptyAvatar}`} style={style}>
+            {getUserNameForAvatar(name)}
           </div>
         )}
         {showInfo && (
           <div className={styles.avatarInfo}>
-            <div className={styles.avatarName}>{userName}</div>
-            {avatarSignature && (
-              <div className={styles.avatarSignature}>{avatarSignature}</div>
-            )}
+            <div className={styles.avatarName}>{name}</div>
           </div>
         )}
       </div>
     );
-  }
-}
+};
+
+export default Avatar;
 

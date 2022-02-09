@@ -1,0 +1,27 @@
+.header {
+  background: #29394D;
+  border-radius: 5px 5px 0px 0px;
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+.headerActions {
+  margin-left: auto;
+  display: flex;
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    cursor: pointer;
+
+    &:first-child {
+      border-right: 2px solid #6D7F92;
+      padding-right: 16px;
+    }
+  }
+}

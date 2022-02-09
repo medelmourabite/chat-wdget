@@ -1,0 +1,38 @@
+.message {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #F1F2F4;
+
+  & > span {
+    padding: 4px 12px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: #FEFEFE;
+    color: #2c2b3f;
+  }
+}
+
+.userInfo {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #29394D;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & > div:last-child {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #6D7F92;
+  }
+}
+
+.messageContent {
+  padding: 8px 12px;
+  border-radius: 2px;
+}

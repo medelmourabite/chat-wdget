@@ -1,0 +1,70 @@
+.roomItem {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding: 0 18px;
+  border-top: 1px solid #F1F2F4;
+  cursor: pointer;
+
+  &:hover {
+    background: #F1F2F4;
+  }
+
+  & > div {
+    flex: 0;
+    margin: 0 5px;
+  }
+
+  & > div:nth-child(2) {
+    max-width: 226px;
+    flex: 2;
+  }
+}
+
+.roomName {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #29394D;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 210px;
+}
+
+.roomLastMsg {
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: #6D7F92;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 210px;
+}
+
+.roomLastMsgTs {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #6D7F92;
+  white-space: nowrap;
+  margin: 0 0 6px 0;
+}
+
+.roomUserUnreads {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #18A0FB 0%, #2495E1 100%);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 15px;
+  text-align: center;
+  display: block;
+  color: #FFFFFF;
+  margin-left: auto;
+  margin-right: 0;
+}

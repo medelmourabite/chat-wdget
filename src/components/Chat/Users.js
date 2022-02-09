@@ -8,11 +8,12 @@ const Users = (props) => {
     const name = users
       .map(({ firstName, lastName }) => `${firstName} ${lastName}`)
       .join(", ");
-    const avatars = users.map(({ id, firstName, lastName, avatarUrl }) => (
+    const avatars = users.map(({ id, userName, firstName, lastName, avatarUrl }) => (
       <Avatar
         key={"user-" + id}
         lastName={lastName}
         firstName={firstName}
+        userName={userName}
         avatarUrl={avatarUrl}
         showInfo={false}
       />

@@ -1,0 +1,183 @@
+.editor {
+  width: 100%;
+  :global(.sun-editor) {
+    border: none;
+
+    :global(.se-wrapper) {
+      transition: all .2s;
+      height: 72px;
+      max-height: 72px;
+      overflow: scroll;
+      border: none;
+    }
+
+    :global(.se-btn-tray) {
+      padding: 0;
+
+      :global(.se-btn-module-border) {
+        border: 0;
+
+        ul {
+          margin-left: 4px;
+
+          li {
+            margin: -1px;
+          }
+        }
+      }
+
+      :global(.se-btn) {
+        font-size: 12px;
+        line-height: 19px;
+        background-color: #f1f2f4;
+        border-radius: 2px;
+        border: none;
+        height: 26px;
+        box-shadow: none;
+        margin: 0;
+        color: #6d7f92;
+
+        span {
+          font-size: 12px;
+          text-transform: uppercase;
+          color: #6d7f92;
+          font-weight: normal;
+        }
+
+        &:hover {
+          background: #3c4e64;
+          box-shadow: none;
+
+          span, i {
+            color: white;
+          }
+
+          svg {
+            fill: white;
+          }
+        }
+
+        &.se-btn-hidden {
+          visibility: hidden;
+        }
+      }
+    }
+
+    :global(.se-toolbar) {
+      border: none;
+      outline: none;
+      font-size: 15px;
+      margin-bottom: 5px;
+      user-select: none;
+      background-color: transparent;
+    }
+
+    :global(.se-btn-module) {
+      border: none;
+    }
+
+    :global(.se-btn-select.se-btn-tool-size) {
+      width: 58px;
+    }
+
+    :global(.se-btn-select.se-btn-tool-font) {
+      width: 90px;
+    }
+
+    :global(.se-select) {
+      label {
+        padding-right: 5px;
+      }
+
+      select {
+        appearance: auto;
+
+        option {
+          width: 100px;
+        }
+      }
+
+      .example-div {
+        padding-top: 5px;
+
+        &.hide {
+          visibility: hidden;
+        }
+      }
+
+      .options-div {
+        visibility: hidden;
+
+        &.visible {
+          visibility: visible;
+        }
+
+        span {
+          font-size: 12px;
+          color: #29394D;
+        }
+
+        & > div:first-of-type {
+          margin: .5rem 0 1rem;
+
+          label {
+            font-weight: 500;
+          }
+
+          input {
+            margin-bottom: 10px;
+          }
+        }
+
+        button {
+          background-color: transparent;
+        }
+      }
+
+      :global(.options-scroll) {
+        &.scrolling-div {
+          overflow-y: scroll;
+          height: 210px;
+        }
+      }
+    }
+
+    :global(.se-resizing-bar.se-resizing-none) {
+      display: none;
+    }
+
+    :global(.se-wrapper .se-wrapper-wysiwyg) {
+      padding: 8px 5px;
+    }
+
+    :global(.se-wrapper .se-placeholder) {
+      padding: 12px 6px;
+    }
+  }
+}
+
+.expandIcon {
+  position: absolute;
+  background: white;
+  right: 0;
+  top: -10px;
+  width: 60px;
+  cursor: pointer;
+
+  svg {
+    margin-left: 14px;
+    transition: transform .2s;
+  }
+}
+
+.isEditorExpanded {
+  &.editor {
+    :global(.sun-editor .se-wrapper) {
+      height: 492px;
+      max-height: 492px;
+    }
+  }
+  .expandIcon svg {
+    transform: rotate(180deg);
+  }
+}
