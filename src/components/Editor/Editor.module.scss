@@ -9,6 +9,7 @@
       max-height: 72px;
       overflow: scroll;
       border: none;
+      min-height: unset;
     }
 
     :global(.se-btn-tray) {
@@ -173,8 +174,8 @@
 .isEditorExpanded {
   &.editor {
     :global(.sun-editor .se-wrapper) {
-      height: 492px;
-      max-height: 492px;
+      height: 492px !important;
+      max-height: 492px !important;
     }
   }
   .expandIcon svg {

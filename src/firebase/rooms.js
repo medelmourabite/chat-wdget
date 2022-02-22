@@ -1,7 +1,7 @@
 import firestore from "./firestore";
-import {getUID, MESSAGES, ROOMS} from "./misc";
+import {BOT, getUID, MESSAGES, ROOMS} from "./misc";
 
-export const getCurrentRoom = async (rid, roomName = "", users) => {
+export const getCurrentRoom = async (rid, roomName = "", user, users = [], firstMsg) => {
   try {
     const db = firestore.collection(ROOMS);
     const querySnapshot = await db.doc(rid).get();
@@ -19,11 +19,26 @@ export const getCurrentRoom = async (rid, roomName = "", users) => {
   } catch (e) {
     console.error(e);
   }
+  const userIds = users.map(({id}) => getUID(id));
+  const unreads = userIds.reduce((acc, uid) => {
+    if (uid !== getUID(user.id)) {
+      acc[uid] = 0;
+    } else {
+      acc[uid] = 1;
+    }
+    return acc;
+  }, {});
   return {
     rid,
     users,
     name: roomName || users.map(({userName}) => userName).join(","),
-    userIds: users.map(({id}) => getUID(id)),
+    userIds,
+    unreads,
+    lastMsg: {
+      from: BOT,
+      ts: Date.now(),
+      ...firstMsg
+    },
     isDraft: true,
   };
 };

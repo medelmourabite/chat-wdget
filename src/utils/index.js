@@ -1,4 +1,6 @@
 import moment from "moment";
+import "moment/locale/fr";
+import "moment/locale/nl";
 
 import {
   align,
@@ -15,48 +17,48 @@ import {
 
 const yesterday = "hier";
 const sameDay = "H:mm";
-/*
-export const timeSince = (date) => {
 
-  var seconds = Math.floor((new Date() - date) / 1000);
-
-  var interval = seconds / 31536000;
-
-  if (interval > 1) {
-    return Math.floor(interval) + " years";
-  }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    return Math.floor(interval) + " months";
-  }
-  interval = seconds / 86400;
-  if (interval > 1) {
-    return Math.floor(interval) + " days";
-  }
-  interval = seconds / 3600;
-  if (interval > 1) {
-    return Math.floor(interval) + " hours";
-  }
-  interval = seconds / 60;
-  if (interval > 1) {
-    return Math.floor(interval) + " minutes";
-  }
-  return Math.floor(seconds) + " seconds";
-};*/
+// export const timeSince = (date) => {
+//
+//   let seconds = Math.floor((new Date() - date) / 1000);
+//
+//   let interval = seconds / 31536000;
+//
+//   if (interval > 1) {
+//     return Math.floor(interval) + " years";
+//   }
+//   interval = seconds / 2592000;
+//   if (interval > 1) {
+//     return Math.floor(interval) + " months";
+//   }
+//   interval = seconds / 86400;
+//   if (interval > 1) {
+//     return Math.floor(interval) + " days";
+//   }
+//   interval = seconds / 3600;
+//   if (interval > 1) {
+//     return Math.floor(interval) + " hours";
+//   }
+//   interval = seconds / 60;
+//   if (interval > 1) {
+//     return Math.floor(interval) + " minutes";
+//   }
+//   return Math.floor(seconds) + " seconds";
+// };
 
 const sameElse = function (now) {
   const diff = Math.ceil(this.diff(now, "years", true));
   return diff < 0 ? "MMM D YYYY" : "MMM D";
 };
 
-// export const timeSince = (date) => moment(date).calendar(null, {
-//   lastDay: `[${yesterday}]`,
-//   sameDay,
-//   lastWeek: "dddd",
-//   sameElse,
-// });
+export const timeSince = (date) => moment(date).calendar(null, {
+  lastDay: `[${yesterday}]`,
+  sameDay,
+  lastWeek: "dddd",
+  sameElse,
+});
 
- export const timeSince = (date) => moment(date).fromNow(true);
+// export const timeSince = (date) => moment(date).fromNow(true);
 
 export const stripeTags = (str = "") => {
   return str.replace(/(<\/?[^>]+(>|$)|\&[\w]+\;)/g, "");

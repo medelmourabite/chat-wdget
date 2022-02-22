@@ -5,7 +5,7 @@ import Room from "../Room/Room";
 import {createUser, getCurrentRoom} from "../../firebase";
 import {useTranslation} from "../../i18n";
 
-const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users = [], showRooms = true, firstMsg = "", lng = "fr"}) => {
+const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users = [], showRooms = true, firstMsg = null, lng = "fr"}) => {
   const [showRoom, setShowRoom] = useState(false);
   const [currentRoom, setCurrentRoom] = useState(undefined);
   const {setLng} = useTranslation();
@@ -19,16 +19,22 @@ const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users =
 
   useEffect(async () => {
     if (roomId && users?.length) {
-      const currentRoom = await getCurrentRoom(`${scope}_${roomId}`, roomName, users);
+      const currentRoom = await getCurrentRoom(`${scope}_${roomId}`, roomName, currentUser, users, firstMsg);
       setCurrentRoom(currentRoom);
-      setShowRoom(true);
     }
   }, [roomId, users.length]);
 
+  const openRoom = (room) => {
+    setCurrentRoom(room);
+    setShowRoom(true);
+  };
+
   return <div className={styles.container}>
-    {currentRoom && <Room currentUser={currentUser} currentRoom={currentRoom} closeRoom={() => setCurrentRoom(null)}
-                          firstMsg={firstMsg}/>}
-    {showRooms && <Rooms currentUser={currentUser} openRoom={(room) => setCurrentRoom(room)}/>}
+    {currentRoom && showRoom ? <Room currentUser={currentUser}
+                                   currentRoom={currentRoom}
+                                   closeRoom={() => setShowRoom(false)}
+                                   firstMsg={firstMsg}/> : null}
+    {showRooms && <Rooms currentRoom={currentRoom} currentUser={currentUser} openRoom={openRoom}/>}
   </div>;
 };
 

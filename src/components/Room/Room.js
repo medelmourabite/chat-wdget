@@ -17,7 +17,7 @@ const Room = ({currentUser, currentRoom, closeRoom, firstMsg}) => {
   const {t,lng} = useTranslation();
   const bottomRef = useRef();
 
-  const firstMessage  = firstMsg && currentRoom.isDraft ? {msg: firstMsg, from: BOT, ts: Date.now()} : null;
+  const firstMessage  = firstMsg && currentRoom.isDraft ? {ts: Date.now(), from: BOT, ...firstMsg} : null;
 
   const subscribeToMessages = () => {
     return getMessageSubs(currentRoom, (messages) => {
