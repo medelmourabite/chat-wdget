@@ -6,7 +6,7 @@ import {getUserRoomsSubs} from "../../firebase";
 import cx from "classnames";
 import {SearchBar} from "../SearchBar/SearchBar";
 
-const Rooms = ({currentUser, currentRoom, openRoom}) => {
+const Rooms = ({currentUser, openRoom, draftRoom}) => {
   const {userName, firstName, lastName, avatarUrl} = currentUser;
   const [rooms, setRooms] = useState([]);
   const [query, setQuery] = useState("");
@@ -30,11 +30,14 @@ const Rooms = ({currentUser, currentRoom, openRoom}) => {
   if (status === "CLOSED") {
     return null;
   }
+
+  const showDraftRoom = draftRoom?.rid && !filteredRooms.some(({rid}) => rid === draftRoom.rid);
+
   return <div className={cx(styles.rooms, {[styles.minimized]: status === "MINIMIZED"})}>
     <Header name={userName || `${firstName} ${lastName}`} avatar={avatarUrl} status={status} setStatus={setStatus}/>
     <div className={styles.roomsList}>
       <SearchBar setQuery={setQuery} />
-      {currentRoom?.isDraft ? <Item currentUser={currentUser} room={currentRoom} openRoom={openRoom}/> : null}
+      {showDraftRoom ? <Item currentUser={currentUser} room={draftRoom} openRoom={openRoom}/> : null}
       {filteredRooms.map((room) => (
         <Item key={room.rid} currentUser={currentUser} room={room} openRoom={openRoom}/>
       ))}

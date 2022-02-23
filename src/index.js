@@ -102,11 +102,11 @@ window.ChatWidget.mount({
 // Chat publique:
 // window.ChatWidget = new Widget();
 // window.ChatWidget.mount({
-//   roomId: "public-channel-event-6",
+//   roomId: "public-channel-event-666",
 //   roomName: "Chat Publique Event 6",
 //   scope: "EVENT",
-//   firstMsg : "<h2>Hello world !</h2>",
-//   showRooms: true,
+//   firstMsg : {msg: "<h2>Hello world !</h2>"},
+//   showRooms: false,
 //   currentUser: {
 //     id: 5,
 //     userName: "User 5",

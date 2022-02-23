@@ -8,6 +8,7 @@ import {useTranslation} from "../../i18n";
 const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users = [], showRooms = true, firstMsg = null, lng = "fr"}) => {
   const [showRoom, setShowRoom] = useState(false);
   const [currentRoom, setCurrentRoom] = useState(undefined);
+  const [draftRoom, setDraftRoom] = useState(undefined);
   const {setLng} = useTranslation();
 
   useEffect(async () => {
@@ -19,8 +20,14 @@ const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users =
 
   useEffect(async () => {
     if (roomId && users?.length) {
-      const currentRoom = await getCurrentRoom(`${scope}_${roomId}`, roomName, currentUser, users, firstMsg);
-      setCurrentRoom(currentRoom);
+      const r = await getCurrentRoom(`${scope}_${roomId}`, roomName, currentUser, users, firstMsg);
+      if(r.isDraft) {
+        setDraftRoom(r);
+      }
+      setCurrentRoom(r);
+      if(!showRooms) {
+        setShowRoom(true);
+      }
     }
   }, [roomId, users.length]);
 
@@ -34,7 +41,7 @@ const ChatContainer = ({currentUser, roomId, roomName, scope = "GLOBAL", users =
                                    currentRoom={currentRoom}
                                    closeRoom={() => setShowRoom(false)}
                                    firstMsg={firstMsg}/> : null}
-    {showRooms && <Rooms currentRoom={currentRoom} currentUser={currentUser} openRoom={openRoom}/>}
+    {showRooms && <Rooms draftRoom={draftRoom} currentUser={currentUser} openRoom={openRoom}/>}
   </div>;
 };
 

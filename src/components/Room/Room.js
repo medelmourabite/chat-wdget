@@ -10,12 +10,11 @@ import {BOT} from "../../firebase/misc";
 import {useTranslation} from "../../i18n";
 
 const Room = ({currentUser, currentRoom, closeRoom, firstMsg}) => {
-  let {name, avatar, users} = currentRoom;
+  let {name, avatar} = currentRoom;
   const [messages, setMessages] = useState([]);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState("");
   const {t,lng} = useTranslation();
-  const bottomRef = useRef();
 
   const firstMessage  = firstMsg && currentRoom.isDraft ? {ts: Date.now(), from: BOT, ...firstMsg} : null;
 
@@ -39,12 +38,15 @@ const Room = ({currentUser, currentRoom, closeRoom, firstMsg}) => {
   }, [messages.length]);
 
   useEffect(() => {
-    if (currentRoom.isDraft) return;
+    if (currentRoom.isDraft) {
+      return;
+    }
     const unsubscribe = subscribeToMessages();
     setStatus("MAXIMIZED");
     updateRoom(currentRoom.rid, {["unreads.user-" + currentUser.id] : 0});
     return () => {
       unsubscribe();
+      setMessages([]);
     }
   }, [currentRoom.rid, currentRoom.isDraft]);
 

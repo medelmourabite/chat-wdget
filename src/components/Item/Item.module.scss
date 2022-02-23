@@ -6,6 +6,10 @@
   border-top: 1px solid #F1F2F4;
   cursor: pointer;
 
+  p {
+    text-align: left;
+  }
+
   &:hover {
     background: #F1F2F4;
   }
