@@ -1,5 +1,7 @@
-import firestore from "./firestore";
+import firebase from "./firebase";
 import {BOT, getUID, MESSAGES, ROOMS} from "./misc";
+
+const firestore = firebase.firestore();
 
 export const getCurrentRoom = async (rid, roomName = "", user, users = [], firstMsg) => {
   try {

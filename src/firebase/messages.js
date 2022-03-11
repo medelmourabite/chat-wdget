@@ -1,5 +1,7 @@
-import firestore from "./firestore";
+import firebase from "./firebase";
 import {BOT, getUID, MESSAGES, ROOMS} from "./misc";
+
+const firestore = firebase.firestore();
 
 export const createMessage = async (msg, user, room, firstMessage) => {
   try {

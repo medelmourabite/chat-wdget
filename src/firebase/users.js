@@ -1,5 +1,17 @@
-import firestore from "./firestore";
+import firebase from "./firebase";
 import {USERS, getUID} from "./misc";
+
+const firestore = firebase.firestore();
+
+export const login = async () => {
+  try {
+    await firebase.auth().signInAnonymously();
+    return { isLogged: true};
+  }catch (e) {
+    console.error(e);
+    return { isLogged: false};
+  }
+};
 
 export const createUser = async (user) => {
   try {
